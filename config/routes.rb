@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'products#index' # /admin/ 後台根路徑
-    resources :products
+    resources :products, except: [:show]
+    resources :vendors, except: [:show]
   end
 end

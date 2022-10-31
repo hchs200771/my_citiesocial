@@ -1,8 +1,8 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/admin">
+    <%= link_to admin_root_path, class: "navbar-item" do %>
       <i class="fas fa-home"></i>
-    </a>
+    <% end %>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -13,13 +13,8 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Home
-      </a>
-
-      <a class="navbar-item">
-        Documentation
-      </a>
+      <%= link_to 'Vender', admin_vendors_path, class: "navbar-item" %>
+      <%= link_to 'Product', admin_products_path, class: "navbar-item" %>
     </div>
   </div>
 </nav>
