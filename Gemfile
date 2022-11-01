@@ -27,7 +27,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'figaro', '~> 1.2'
+
+# Model
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+gem 'paranoia', '~> 2.2'
 
 # devise and omniauth
 gem 'devise', '~> 4.2'
