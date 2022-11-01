@@ -10,6 +10,10 @@ require("@rails/activestorage").start()
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+// import actiontext
+import "trix"
+import "@rails/actiontext"
+
 import "controllers"
 import "../styles/backend"
 import "../styles/shared"

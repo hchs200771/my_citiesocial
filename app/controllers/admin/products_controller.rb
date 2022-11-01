@@ -7,11 +7,12 @@ class Admin::ProductsController < Admin::BaseController
 
   def new
     @product = Product.new
+    @product.skus.build
   end
 
   def create
     @product = Product.new(product_params)
-    if @product.save
+    if @product.save!
       redirect_to admin_products_path, notice: 'Product successfully created'
     else
       flash[:error] = @product.errors.full_messages
@@ -48,7 +49,18 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def product_params
-    params.require(:product).permit(:name, :vendor_id, :list_price, :sell_price, :on_sell)
+    params.require(:product).permit(:name,
+                                    :vendor_id,
+                                    :list_price,
+                                    :sell_price,
+                                    :on_sell,
+                                    :description,
+                                    skus_attributes: [
+                                      :id,
+                                      :spec,
+                                      :quantity,
+                                      :_destroy
+                                    ])
   end
 
 end
