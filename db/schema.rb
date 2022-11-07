@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_070926) do
+ActiveRecord::Schema.define(version: 2022_11_07_052249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_10_31_070926) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "deleted_at"
+    t.integer "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_categories_on_deleted_at"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -55,6 +64,31 @@ ActiveRecord::Schema.define(version: 2022_10_31_070926) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "sku_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["sku_id"], name: "index_order_items_on_sku_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "num"
+    t.string "recipient"
+    t.string "tel"
+    t.string "address"
+    t.string "state", default: "pending"
+    t.string "note"
+    t.bigint "user_id", null: false
+    t.datetime "paid_at"
+    t.string "transaction_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -67,6 +101,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_070926) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["code"], name: "index_products_on_code", unique: true
     t.index ["deleted_at"], name: "index_products_on_deleted_at"
     t.index ["vendor_id"], name: "index_products_on_vendor_id"
@@ -81,6 +117,13 @@ ActiveRecord::Schema.define(version: 2022_10_31_070926) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_skus_on_deleted_at"
     t.index ["product_id"], name: "index_skus_on_product_id"
+  end
+
+  create_table "subscribes", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_subscribes_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,5 +151,9 @@ ActiveRecord::Schema.define(version: 2022_10_31_070926) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "skus"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "categories"
   add_foreign_key "products", "vendors"
 end

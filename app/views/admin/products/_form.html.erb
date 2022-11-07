@@ -1,4 +1,11 @@
 <%= form_with(model: [:admin, product]) do |form| %>
+  <div class="field">
+    <%= form.label :cover_image, '商品主圖', class: 'label' %>
+    <%= form.file_field :cover_image %>
+    <%= image_tag form.object.cover_image.variant(resize: '200x200') if form.object.cover_image.attached? %>
+    <hr>
+  </div>
+
   <div class="columns">
     <div class="column is-6">
       <div class="field">
@@ -6,11 +13,19 @@
         <%= form.text_field :name, class: 'input is-medium' %>
       </div>
     </div>
-    <div class="column is-6">
+    <div class="column is-3">
       <div class="field">
         <%= form.label :vendor_id, '廠商', class: 'label' %>
         <div class="select is-medium is-fullwidth">
           <%= form.collection_select :vendor_id, Vendor.available, :id, :title %>
+        </div>
+      </div>
+    </div>
+    <div class="column is-3">
+      <div class="field">
+        <%= form.label :vendor_id, '分類', class: 'label' %>
+        <div class="select is-medium is-fullwidth">
+          <%= form.collection_select :category_id, Category.all, :id, :name %>
         </div>
       </div>
     </div>

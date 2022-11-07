@@ -1,0 +1,8 @@
+<%= form_with(model: [:admin, category]) do |form| %>
+  <div class="field">
+    <%= form.label :name, 'Name', class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <%= form.submit class: "button" %>
+<% end %>
