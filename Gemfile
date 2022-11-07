@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -29,6 +29,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'figaro', '~> 1.2'
 
 # Model
+gem 'acts_as_list', '~> 1.0', '>= 1.0.4'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'paranoia', '~> 2.2'
 
@@ -57,6 +58,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   gem 'webdrivers'
 end
 
