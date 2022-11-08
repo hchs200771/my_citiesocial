@@ -29,6 +29,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'figaro', '~> 1.2'
 
 # Model
+gem 'aasm', '~> 5.4'
 gem 'acts_as_list', '~> 1.0', '>= 1.0.4'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'paranoia', '~> 2.2'
@@ -38,6 +39,9 @@ gem 'devise', '~> 4.2'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
+
+# API
+gem 'faraday', '~> 2.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
