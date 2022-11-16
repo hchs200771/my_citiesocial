@@ -9,7 +9,16 @@ Rails.application.routes.draw do
       get :checkout
     end
   end
-  resources :orders, except: [:new, :edit, :update, :destroy]
+  resources :orders, except: [:new, :edit, :update, :destroy] do
+    collection do
+      get "confirm"
+    end
+    member do
+      post "pay"
+      get "pay_confirm"
+      delete "cancel"
+    end
+  end
   namespace :admin do
     root 'products#index' # /admin/ 後台根路徑
     resources :products, except: [:show]

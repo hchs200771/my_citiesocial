@@ -6,3 +6,7 @@
 
 GOOGLE_CLIENT_ID: ""
 GOOGLE_CLIENT_SECRET: ""
+
+Line_pay_channel_id: ''
+Line_pay_channel_secret: ''
+Line_pay_end_point: 'https://sandbox-api-pay.line.me'
